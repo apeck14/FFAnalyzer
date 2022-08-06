@@ -1,0 +1,162 @@
+[
+	{
+		"name": "Arizona Cardinals",
+		"abbr": "ARI",
+		"aliases": ["Arizona Cardinals", "Arizona D/ST", "Arizona"]
+	},
+	{
+		"name": "Atlanta Falcons",
+		"abbr": "ATL",
+		"aliases": ["Atlanta Falcons", "Atlanta D/ST", "Atlanta"]
+	},
+	{
+		"name": "Baltimore Ravens",
+		"abbr": "BAL",
+		"aliases": ["Baltimore Ravens", "Baltimore D/ST", "Baltimore"]
+	},
+	{
+		"name": "Buffalo Bills",
+		"abbr": "BUF",
+		"aliases": ["Buffalo Bills", "Buffalo D/ST", "Buffalo"]
+	},
+	{
+		"name": "Carolina Panthers",
+		"abbr": "CAR",
+		"aliases": ["Carolina Panthers", "Carolina D/ST", "Carolina"]
+	},
+	{
+		"name": "Chicago Bears",
+		"abbr": "CHI",
+		"aliases": ["Chicago Bears", "Chicago D/ST", "Chicago"]
+	},
+	{
+		"name": "Cincinnati Bengals",
+		"abbr": "CIN",
+		"aliases": ["Cincinnati Bengals", "Cincinnati D/ST", "Cincinnati"]
+	},
+	{
+		"name": "Cleveland Browns",
+		"abbr": "CLE",
+		"aliases": ["Cleveland Browns", "Cleveland D/ST", "Cleveland"]
+	},
+	{
+		"name": "Dallas Cowboys",
+		"abbr": "DAL",
+		"aliases": ["Dallas Cowboys", "Dallas D/ST", "Dallas"]
+	},
+	{
+		"name": "Denver Broncos",
+		"abbr": "DEN",
+		"aliases": ["Denver Broncos", "Denver D/ST", "Denver"]
+	},
+	{
+		"name": "Detroit Lions",
+		"abbr": "DET",
+		"aliases": ["Detroit Lions", "Detroit D/ST", "Detroit"]
+	},
+	{
+		"name": "Green Bay Packers",
+		"abbr": "GB",
+		"aliases": ["Green Bay Packers", "Green Bay D/ST", "Green Bay"]
+	},
+	{
+		"name": "Houston Texans",
+		"abbr": "HOU",
+		"aliases": ["Houston Texans", "Houston D/ST", "Houston"]
+	},
+	{
+		"name": "Indianapolis Colts",
+		"abbr": "IND",
+		"aliases": ["Indianapolis Colts", "Indianapolis D/ST", "Indianapolis"]
+	},
+	{
+		"name": "Jacksonville Jaguars",
+		"abbr": "JAC",
+		"aliases": ["Jacksonville Jaguars", "Jacksonville D/ST", "Jacksonville"]
+	},
+	{
+		"name": "Kansas City Chiefs",
+		"abbr": "KC",
+		"aliases": ["Kansas City Chiefs", "Kansas City D/ST", "Kansas City"]
+	},
+	{
+		"name": "Las Vegas Raiders",
+		"abbr": "LV",
+		"aliases": ["Las Vegas Raiders", "Las Vegas D/ST", "Las Vegas"]
+	},
+	{
+		"name": "Los Angeles Chargers",
+		"abbr": "LAC",
+		"aliases": ["Los Angeles Chargers", "Los Angeles Chargers D/ST", "L.A. Chargers"]
+	},
+	{
+		"name": "Los Angeles Rams",
+		"abbr": "LAR",
+		"aliases": ["Los Angeles Rams", "Los Angeles Rams D/ST", "L.A. Rams"]
+	},
+	{
+		"name": "Miami Dolphins",
+		"abbr": "MIA",
+		"aliases": ["Miami Dolphins", "Miami D/ST", "Miami"]
+	},
+	{
+		"name": "Minnesota Vikings",
+		"abbr": "MIN",
+		"aliases": ["Minnesota Vikings", "Minnesota D/ST", "Minnesota"]
+	},
+	{
+		"name": "New England Patriots",
+		"abbr": "NE",
+		"aliases": ["New England Patriots", "New England D/ST", "New England"]
+	},
+	{
+		"name": "New Orleans Saints",
+		"abbr": "NO",
+		"aliases": ["New Orleans Saints", "New Orleans D/ST", "New Orleans"]
+	},
+	{
+		"name": "New York Giants",
+		"abbr": "NYG",
+		"aliases": ["New York Giants", "New York Giants D/ST", "N.Y. Giants"]
+	},
+	{
+		"name": "New York Jets",
+		"abbr": "NYJ",
+		"aliases": ["New York Jets", "New York Jets D/ST", "N.Y. Jets"]
+	},
+	{
+		"name": "Philadelphia Eagles",
+		"abbr": "PHI",
+		"aliases": ["Philadelphia Eagles", "Philadelphia D/ST", "Philadelphia"]
+	},
+	{
+		"name": "Pittsburgh Steelers",
+		"abbr": "PIT",
+		"aliases": ["Pittsburgh Steelers", "Pittsburgh D/ST", "Pittsburgh"]
+	},
+	{
+		"name": "San Francisco 49ers",
+		"abbr": "SF",
+		"aliases": ["San Francisco 49ers", "San Francisco D/ST", "San Francisco"]
+	},
+	{
+		"name": "Seattle Seahawks",
+		"abbr": "SEA",
+		"aliases": ["Seattle Seahawks", "Seattle D/ST", "Seattle"]
+	},
+	{
+		"name": "Tampa Bay Buccaneers",
+		"abbr": "TB",
+		"aliases": ["Tampa Bay Buccaneers", "Tampa Bay D/ST", "Tampa Bay"]
+	},
+	{
+		"name": "Tennessee Titans",
+		"abbr": "TEN",
+		"aliases": ["Tennessee Titans", "Tennessee D/ST", "Tennessee"]
+	},
+	{
+		"name": "Washington Commanders",
+		"abbr": "WAS",
+		"aliases": ["Washington Commanders", "Washington D/ST", "Washington", "Washington Football Team"]
+	}
+]

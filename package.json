@@ -1,0 +1,18 @@
+{
+	"name": "ffanalyzer",
+	"version": "1.0.0",
+	"description": "Gather player projections for 2022 Fantasy Football season!",
+	"main": "index.js",
+	"scripts": {
+		"start": "node ."
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"csv-writer": "^1.6.0",
+		"lodash": "^4.17.21",
+		"puppeteer-extra": "^3.3.4",
+		"puppeteer-extra-plugin-adblocker": "^2.13.4",
+		"puppeteer-extra-plugin-stealth": "^2.11.0"
+	}
+}
