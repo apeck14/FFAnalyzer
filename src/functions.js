@@ -174,12 +174,12 @@ const createCSV = async (projections = []) => {
 	let ks = projections.filter((p) => p.pos === "K").sort((a, b) => b.proj - a.proj)
 	let ds = projections.filter((p) => p.pos === "D").sort((a, b) => b.proj - a.proj)
 
-	qbs = qbs.slice(0, Math.min(qbs.length, QBs))
-	rbs = rbs.slice(0, Math.min(rbs.length, RBs))
-	wrs = wrs.slice(0, Math.min(wrs.length, WRs))
-	tes = tes.slice(0, Math.min(tes.length, TEs))
-	ks = ks.slice(0, Math.min(ks.length, Ks))
-	ds = ds.slice(0, Math.min(ds.length, DEFs))
+	qbs = qbs.slice(0, Math.min(qbs.length, QBs)).map((p, i) => ({ posRank: i, ...p }))
+	rbs = rbs.slice(0, Math.min(rbs.length, RBs)).map((p, i) => ({ posRank: i, ...p }))
+	wrs = wrs.slice(0, Math.min(wrs.length, WRs)).map((p, i) => ({ posRank: i, ...p }))
+	tes = tes.slice(0, Math.min(tes.length, TEs)).map((p, i) => ({ posRank: i, ...p }))
+	ks = ks.slice(0, Math.min(ks.length, Ks)).map((p, i) => ({ posRank: i, ...p }))
+	ds = ds.slice(0, Math.min(ds.length, DEFs)).map((p, i) => ({ posRank: i, ...p }))
 
 	const players = [...qbs, ...rbs, ...wrs, ...tes, ...ks, ...ds]
 
