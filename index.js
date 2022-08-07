@@ -11,7 +11,10 @@ const WalterFootball = require("./src/scrapers/walterfootball")
 const ESPN = require("./src/scrapers/espn")
 const FantasyNerds = require("./src/scrapers/fantasynerds")
 const NFL = require("./src/scrapers/nfl")
+
 const { groupData, calculateProjections, createCSV } = require("./src/functions")
+const config = require("./config.json")
+const configSchema = require("./src/validation")
 
 puppeteer.use(StealthPlugin())
 puppeteer.use(AdblockerPlugin({ blockTrackers: true }))
@@ -22,6 +25,13 @@ puppeteer
 		args: ["--no-sandbox", "--disable-setuid-sandbox", '--user-data-dir="/tmp/chromium"', "--disable-web-security", "--disable-features=site-per-process", "--start-maximized"],
 	})
 	.then(async (browser) => {
+		try {
+			await configSchema.validateAsync(config)
+		} catch (err) {
+			console.log((err?.details[0]?.message || "Validation error") + " in config.json")
+			process.exit()
+		}
+
 		console.log("Gathering data from source(s)...")
 
 		const [betiq, cbs, espn, fantasynerds, fftoday, nfl, numberfire, walterfootball, razzball] = await Promise.all([

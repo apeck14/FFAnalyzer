@@ -1,13 +1,19 @@
 {
 	"offense": {
 		"passingYards": 0.04,
-		"passingTDs": 6,
-		"ints": -2,
+		"passingTDs": 4,
+		"ints": -1,
 		"rushingYards": 0.1,
 		"rushingTDs": 6,
 		"receptions": 0.5,
 		"receivingYards": 0.1,
-		"receivingTDs": 6
+		"receivingTDs": 6,
+		"bonusPoints": {
+			"points": 1,
+			"passingYards": 300,
+			"rushingYards": 100,
+			"receivingYards": 100
+		}
 	},
 	"defense": {
 		"sacks": 1,
@@ -16,19 +22,25 @@
 		"TDs": 6,
 		"safeties": 2,
 		"pointsAllowedUpTo": {
-			"0": 12,
-			"6": 9,
-			"13": 6,
-			"20": 3,
-			"27": 1,
-			"34": 0,
-			"else": -2
+			"0": 10,
+			"6": 7,
+			"13": 4,
+			"20": 1,
+			"27": 0,
+			"34": -1,
+			"else": -4
 		}
 	},
 	"kickers": {
 		"patMade": 1,
-		"patMissed": -1,
-		"fieldGoalYards": 0.1
+		"fieldGoalYards": 0,
+		"distanceUpTo": {
+			"19": 3,
+			"29": 3,
+			"39": 3,
+			"49": 4,
+			"else": 5
+		}
 	},
 	"csvOptions": {
 		"QBs": 35,

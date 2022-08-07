@@ -102,9 +102,10 @@ const calculateProjections = (groupedData) => {
 	}
 
 	//calculate projections
-	const { passingYards, passingTDs, ints, rushingYards, rushingTDs, receptions, receivingYards, receivingTDs } = offense
+	const { passingYards, passingTDs, ints, rushingYards, rushingTDs, receptions, receivingYards, receivingTDs, bonusPoints } = offense
+	const { points, passingYards: p_ydsBonus, rushingYards: r_ydsBonus, receivingYards: rec_ydsBonus } = bonusPoints
 	const { sacks, ints: int, fumblesRec, TDs, safeties, pointsAllowedUpTo } = defense
-	const { patMade, fieldGoalYards } = kickers
+	const { patMade, fieldGoalYards, distanceUpTo } = kickers
 
 	const avgFieldGoalLengthAttempt = 36.3
 
@@ -153,8 +154,22 @@ const calculateProjections = (groupedData) => {
 				}
 
 				proj += paPerWeekAvgScore * 16
-			} else if (prop === "fgm") proj += p[prop] * (avgFieldGoalLengthAttempt * fieldGoalYards)
-			else proj += p[prop] * scoring[`${prop}Scoring`]
+			} else if (prop === "fgm") {
+				proj += p[prop] * (avgFieldGoalLengthAttempt * fieldGoalYards) //field goal yards
+				proj += p[prop] * distanceUpTo["39"] //field goals by avg distance
+			} else proj += p[prop] * scoring[`${prop}Scoring`]
+
+			//offense yards bonus points
+			if (prop === "p_yds" || prop === "r_yds" || prop === "rec_yds") {
+				const avgYardsPerGame = p[prop] / 16
+
+				if (prop === "p_yds" && p_ydsBonus > 0) {
+					console.log((avgYardsPerGame / p_ydsBonus) * points * 16)
+					proj += (avgYardsPerGame / p_ydsBonus) * points * 16
+				}
+				if (prop === "r_yds" && r_ydsBonus > 0) proj += (avgYardsPerGame / r_ydsBonus) * points * 16
+				if (prop === "rec_yds" && rec_ydsBonus > 0) proj += (avgYardsPerGame / rec_ydsBonus) * points * 16
+			}
 		}
 
 		p["proj"] = proj
