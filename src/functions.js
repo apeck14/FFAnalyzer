@@ -148,8 +148,6 @@ const calculateProjections = (groupedData) => {
 							const diffInPaPts = Math.abs(currentPa - previousPa)
 
 							paPerWeekAvgScore = previousPa - diffInPaPts * (paPerWeekAvg / currentPa)
-
-							// 12 - ((12 - 9) * (5 / 6))
 						}
 					}
 				}
