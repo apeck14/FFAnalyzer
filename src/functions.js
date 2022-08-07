@@ -163,10 +163,7 @@ const calculateProjections = (groupedData) => {
 			if (prop === "p_yds" || prop === "r_yds" || prop === "rec_yds") {
 				const avgYardsPerGame = p[prop] / 16
 
-				if (prop === "p_yds" && p_ydsBonus > 0) {
-					console.log((avgYardsPerGame / p_ydsBonus) * points * 16)
-					proj += (avgYardsPerGame / p_ydsBonus) * points * 16
-				}
+				if (prop === "p_yds" && p_ydsBonus > 0) proj += (avgYardsPerGame / p_ydsBonus) * points * 16
 				if (prop === "r_yds" && r_ydsBonus > 0) proj += (avgYardsPerGame / r_ydsBonus) * points * 16
 				if (prop === "rec_yds" && rec_ydsBonus > 0) proj += (avgYardsPerGame / rec_ydsBonus) * points * 16
 			}
@@ -175,17 +172,17 @@ const calculateProjections = (groupedData) => {
 		p["proj"] = proj
 	}
 
-	return players
+	return players.sort((a, b) => b.proj - a.proj)
 }
 
 const createCSV = async (projections = []) => {
 	const { QBs, RBs, WRs, TEs, Ks, DEFs } = csvOptions
-	let qbs = projections.filter((p) => p.pos === "QB").sort((a, b) => b.proj - a.proj)
-	let rbs = projections.filter((p) => p.pos === "RB").sort((a, b) => b.proj - a.proj)
-	let wrs = projections.filter((p) => p.pos === "WR").sort((a, b) => b.proj - a.proj)
-	let tes = projections.filter((p) => p.pos === "TE").sort((a, b) => b.proj - a.proj)
-	let ks = projections.filter((p) => p.pos === "K").sort((a, b) => b.proj - a.proj)
-	let ds = projections.filter((p) => p.pos === "D").sort((a, b) => b.proj - a.proj)
+	let qbs = projections.filter((p) => p.pos === "QB")
+	let rbs = projections.filter((p) => p.pos === "RB")
+	let wrs = projections.filter((p) => p.pos === "WR")
+	let tes = projections.filter((p) => p.pos === "TE")
+	let ks = projections.filter((p) => p.pos === "K")
+	let ds = projections.filter((p) => p.pos === "D")
 
 	qbs = qbs.slice(0, Math.min(qbs.length, QBs)).map((p, i) => ({ posRank: i + 1, ...p }))
 	rbs = rbs.slice(0, Math.min(rbs.length, RBs)).map((p, i) => ({ posRank: i + 1, ...p }))

@@ -52,5 +52,5 @@ puppeteer
 		const projections = calculateProjections(data)
 		await createCSV(projections)
 
-		console.log("(Projected points only factor in available projected stats!)")
+		console.log("\n(Projected points only factor in available projected stats!)")
 	})
