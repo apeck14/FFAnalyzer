@@ -174,19 +174,19 @@ const createCSV = async (projections = []) => {
 	let ks = projections.filter((p) => p.pos === "K").sort((a, b) => b.proj - a.proj)
 	let ds = projections.filter((p) => p.pos === "D").sort((a, b) => b.proj - a.proj)
 
-	qbs = qbs.slice(0, Math.min(qbs.length, QBs)).map((p, i) => ({ posRank: i, ...p }))
-	rbs = rbs.slice(0, Math.min(rbs.length, RBs)).map((p, i) => ({ posRank: i, ...p }))
-	wrs = wrs.slice(0, Math.min(wrs.length, WRs)).map((p, i) => ({ posRank: i, ...p }))
-	tes = tes.slice(0, Math.min(tes.length, TEs)).map((p, i) => ({ posRank: i, ...p }))
-	ks = ks.slice(0, Math.min(ks.length, Ks)).map((p, i) => ({ posRank: i, ...p }))
-	ds = ds.slice(0, Math.min(ds.length, DEFs)).map((p, i) => ({ posRank: i, ...p }))
+	qbs = qbs.slice(0, Math.min(qbs.length, QBs)).map((p, i) => ({ posRank: i + 1, ...p }))
+	rbs = rbs.slice(0, Math.min(rbs.length, RBs)).map((p, i) => ({ posRank: i + 1, ...p }))
+	wrs = wrs.slice(0, Math.min(wrs.length, WRs)).map((p, i) => ({ posRank: i + 1, ...p }))
+	tes = tes.slice(0, Math.min(tes.length, TEs)).map((p, i) => ({ posRank: i + 1, ...p }))
+	ks = ks.slice(0, Math.min(ks.length, Ks)).map((p, i) => ({ posRank: i + 1, ...p }))
+	ds = ds.slice(0, Math.min(ds.length, DEFs)).map((p, i) => ({ posRank: i + 1, ...p }))
 
 	const players = [...qbs, ...rbs, ...wrs, ...tes, ...ks, ...ds]
 
 	const headers = ["proj", "p_yds", "p_tds", "ints", "r_yds", "r_tds", "recs", "rec_yds", "rec_tds", "sack", "int", "fum_rec", "td", "saf", "pa", "fgm", "xpm"]
 
 	const entries = players.map((p) => {
-		const player = { srcs: p.srcs, name: p.name, pos: p.pos, team: p.team }
+		const player = { posRank: p.posRank, srcs: p.srcs, name: p.name, pos: p.pos, team: p.team }
 		for (const prop of headers) {
 			if (p.hasOwnProperty(prop)) player[prop] = p[prop].toFixed(2)
 			else player[prop] = "0"
@@ -197,7 +197,7 @@ const createCSV = async (projections = []) => {
 
 	const csvWriter = createObjectCsvWriter({
 		path: "projections.csv",
-		header: ["srcs", "name", "pos", "team", ...headers].map((h) => ({ id: h, title: h.toUpperCase() })),
+		header: ["posRank", "srcs", "name", "pos", "team", ...headers].map((h) => ({ id: h, title: h.toUpperCase() })),
 	})
 
 	await csvWriter.writeRecords(entries)
