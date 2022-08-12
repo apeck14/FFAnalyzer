@@ -53,4 +53,5 @@ puppeteer
 		await createCSV(projections)
 
 		console.log("\n(Projected points only factor in available projected stats!)")
+		process.exit()
 	})

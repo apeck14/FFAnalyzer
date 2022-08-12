@@ -44,19 +44,23 @@ const groupData = ([...sources]) => {
 	const rawPlayers = []
 
 	for (const s of sources) {
-		rawPlayers.push(...s)
+		rawPlayers.push(
+			...s.map((p) => ({
+				...p,
+				name: p.name
+					.replace("III", "")
+					.replace("II", "")
+					.replace("Jr.", "")
+					.replace("Sr.", "")
+					.replace(/[^a-zA-Z0-9 ]/g, "")
+					.toLowerCase()
+					.replace("mitch ", "mitchell ")
+					.trim(),
+			}))
+		)
 	}
 
-	const groupedPlayers = groupBy(rawPlayers, (p) =>
-		p.name
-			.replace("III", "")
-			.replace("II", "")
-			.replace("Jr.", "")
-			.replace("Sr.", "")
-			.replace(/[^a-zA-Z0-9 ]/g, "")
-			.toLowerCase()
-			.trim()
-	)
+	const groupedPlayers = groupBy(rawPlayers, "name")
 
 	const players = []
 
