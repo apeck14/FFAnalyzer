@@ -11,9 +11,10 @@ const WalterFootball = require("./src/scrapers/walterfootball")
 const ESPN = require("./src/scrapers/espn")
 const FantasyNerds = require("./src/scrapers/fantasynerds")
 const NFL = require("./src/scrapers/nfl")
-const InjuryRisk = require("./src/scrapers/injuryRisk")
+const CurrentInjuryRisks = require("./src/scrapers/currentInjuryRisks")
+const OtherInjuryRisks = require("./src/scrapers/otherInjuryRisks")
 
-const { groupData, calculateProjections, createCSV } = require("./src/functions")
+const { groupData, calculateProjections, createCSV, injuryPredictions } = require("./src/functions")
 const config = require("./config.json")
 const configSchema = require("./src/validation")
 
@@ -35,7 +36,7 @@ puppeteer
 
 		console.log("Gathering data from source(s)...")
 
-		const [betiq, cbs, espn, fantasynerds, fftoday, nfl, numberfire, walterfootball, razzball, injuryRisk] = await Promise.all([
+		const [betiq, cbs, espn, fantasynerds, fftoday, nfl, numberfire, walterfootball, razzball, currentInjuryRisks, otherInjuryRisks] = await Promise.all([
 			BetIQ(browser),
 			CBS(browser),
 			ESPN(browser),
@@ -45,12 +46,16 @@ puppeteer
 			NumberFire(browser),
 			WalterFootball(browser),
 			RazzBall(browser),
-			InjuryRisk(browser),
+			CurrentInjuryRisks(browser),
+			OtherInjuryRisks(browser),
 		])
 
 		console.log("Data collected! Calculating custom projections...")
 
-		const data = groupData([betiq, cbs, espn, fantasynerds, fftoday, nfl, numberfire, walterfootball, razzball], injuryRisk)
+		//injury risk
+		const injuryRisks = injuryPredictions(currentInjuryRisks, otherInjuryRisks)
+
+		const data = groupData([betiq, cbs, espn, fantasynerds, fftoday, nfl, numberfire, walterfootball, razzball], injuryRisks)
 		const projections = calculateProjections(data)
 		await createCSV(projections)
 

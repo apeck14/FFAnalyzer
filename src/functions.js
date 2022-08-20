@@ -3,6 +3,21 @@ const { createObjectCsvWriter } = require("csv-writer")
 const teams = require("./teams.json")
 const { offense, defense, kickers, csvOptions } = require("../config.json")
 
+const formatName = (str) => {
+	let newStr = str.toLowerCase()
+
+	if (newStr.lastIndexOf(" jr") === newStr.length - 3 || newStr.lastIndexOf(" sr") === newStr.length - 3) newStr = newStr.slice(0, -3)
+
+	return newStr
+		.replace(" iii", "")
+		.replace(" ii", "")
+		.replace(" jr.", "")
+		.replace(" sr.", "")
+		.replace(/[^a-z0-9 ]/g, "")
+		.replace("mitch ", "mitchell ")
+		.trim()
+}
+
 const onCompletion = async (promise, text) => {
 	const res = await promise
 	console.log(`${text} data retrieved!`)
@@ -47,15 +62,7 @@ const groupData = ([...sources], injuryRisks) => {
 		rawPlayers.push(
 			...s.map((p) => ({
 				...p,
-				name: p.name
-					.replace("III", "")
-					.replace("II", "")
-					.replace("Jr.", "")
-					.replace("Sr.", "")
-					.replace(/[^a-zA-Z0-9 ]/g, "")
-					.toLowerCase()
-					.replace("mitch ", "mitchell ")
-					.trim(),
+				name: formatName(p.name),
 			}))
 		)
 	}
@@ -65,7 +72,7 @@ const groupData = ([...sources], injuryRisks) => {
 	const players = []
 
 	for (const p of Object.keys(groupedPlayers)) {
-		const player = { srcs: groupedPlayers[p].length, injury_risk: injuryRisks.find((pl) => pl.player === p)?.risk || "-", name: p }
+		const player = { srcs: groupedPlayers[p].length, injury_risk: injuryRisks.find((pl) => pl.name === p)?.risk || "-", name: p }
 		const pArr = groupedPlayers[p]
 
 		for (const entry of pArr) {
@@ -218,4 +225,18 @@ const createCSV = async (projections = []) => {
 	console.log("CSV written! Check projections.csv")
 }
 
-module.exports = { findDefense, groupData, roundNum, calculateProjections, createCSV, findAverage, onCompletion }
+const injuryPredictions = (currentIRRisks = [], allRisks = []) => {
+	allRisks = allRisks.map((p) => ({ name: formatName(p.name), risk: p.risk }))
+
+	const risks = [...currentIRRisks.map((p) => ({ name: formatName(p.name), risk: p.risk }))]
+
+	for (const p of allRisks) {
+		if (risks.find((pl) => pl.name === p.name) || p.risk === "-") continue
+
+		risks.push(p)
+	}
+
+	return risks
+}
+
+module.exports = { findDefense, groupData, roundNum, calculateProjections, createCSV, findAverage, onCompletion, injuryPredictions, formatName }

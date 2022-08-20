@@ -25,15 +25,7 @@ module.exports = async (browser) => {
 
 				const risk = injuryRisks[i].replace("Injury risk:", "").trim()
 				allPlayers.push({
-					player: a.innerText
-						.replace("III", "")
-						.replace("II", "")
-						.replace("Jr.", "")
-						.replace("Sr.", "")
-						.replace(/[^a-zA-Z0-9 ]/g, "")
-						.toLowerCase()
-						.replace("mitch ", "mitchell ")
-						.trim(),
+					name: a.innerText,
 					risk,
 				})
 			})
