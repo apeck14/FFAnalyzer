@@ -72,7 +72,7 @@ const groupData = ([...sources], injuryRisks) => {
 	const players = []
 
 	for (const p of Object.keys(groupedPlayers)) {
-		const player = { srcs: groupedPlayers[p].length, injury_risk: injuryRisks.find((pl) => pl.name === p)?.risk || "-", name: p }
+		const player = { srcs: groupedPlayers[p].length, injury_risk: injuryRisks.find((pl) => pl.name === p)?.risk || "Very Low", name: p }
 		const pArr = groupedPlayers[p]
 
 		for (const entry of pArr) {
@@ -231,7 +231,7 @@ const injuryPredictions = (currentIRRisks = [], allRisks = []) => {
 	const risks = [...currentIRRisks.map((p) => ({ name: formatName(p.name), risk: p.risk }))]
 
 	for (const p of allRisks) {
-		if (risks.find((pl) => pl.name === p.name) || p.risk === "-") continue
+		if (risks.find((pl) => pl.name === p.name) || p.risk === "Very Low") continue
 
 		risks.push(p)
 	}

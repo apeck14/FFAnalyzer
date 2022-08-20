@@ -35,7 +35,7 @@ module.exports = async (browser, positions = ["qb", "rb", "wr", "te"]) => {
 
 					const perc = r.querySelector("td > span.injury-percent").innerText
 					const percInt = parseInt(perc.slice(0, perc.indexOf("%")).trim())
-					const risk = percInt >= 50 ? "High" : percInt >= 25 ? "Moderate" : percInt >= 15 ? "Low" : "-"
+					const risk = percInt >= 50 ? "High" : percInt >= 25 ? "Moderate" : percInt >= 15 ? "Low" : "Very Low"
 
 					allPlayers.push({
 						name,
