@@ -40,7 +40,7 @@ const findAverage = (arr) => {
 }
 
 //return array of players with data combined from all sources (objs)
-const groupData = ([...sources]) => {
+const groupData = ([...sources], injuryRisks) => {
 	const rawPlayers = []
 
 	for (const s of sources) {
@@ -65,12 +65,12 @@ const groupData = ([...sources]) => {
 	const players = []
 
 	for (const p of Object.keys(groupedPlayers)) {
-		const player = { srcs: groupedPlayers[p].length, name: p }
+		const player = { srcs: groupedPlayers[p].length, injury_risk: injuryRisks.find((pl) => pl.player === p)?.risk || "-", name: p }
 		const pArr = groupedPlayers[p]
 
 		for (const entry of pArr) {
 			for (const prop of Object.keys(entry)) {
-				if ((prop === "srcs" || prop === "name" || prop === "team" || prop === "pos") && player[prop]) continue
+				if ((prop === "srcs" || prop === "injury_risk" || prop === "name" || prop === "team" || prop === "pos") && player[prop]) continue
 
 				if (player[prop]) player[prop].push(entry[prop])
 				else {
@@ -86,7 +86,6 @@ const groupData = ([...sources]) => {
 	return players
 }
 
-//return { pos, name, team, projPts }
 const calculateProjections = (groupedData) => {
 	const players = []
 
@@ -134,7 +133,7 @@ const calculateProjections = (groupedData) => {
 		let proj = 0
 
 		for (const prop of Object.keys(p)) {
-			if (prop === "srcs" || prop === "name" || prop === "pos" || prop === "team") continue
+			if (prop === "srcs" || prop === "injury_risk" || prop === "name" || prop === "pos" || prop === "team") continue
 			if (prop === "pa") {
 				const paScoreProps = Object.keys(pointsAllowedUpTo)
 				const paPerWeekAvg = p[prop] / 16
@@ -200,7 +199,7 @@ const createCSV = async (projections = []) => {
 	const headers = ["proj", "p_yds", "p_tds", "ints", "r_yds", "r_tds", "recs", "rec_yds", "rec_tds", "sack", "int", "fum_rec", "td", "saf", "pa", "fgm", "xpm"]
 
 	const entries = players.map((p) => {
-		const player = { posRank: p.posRank, srcs: p.srcs, name: p.name, pos: p.pos, team: p.team }
+		const player = { posRank: p.posRank, srcs: p.srcs, injury_risk: p.injury_risk, name: p.name, pos: p.pos, team: p.team }
 		for (const prop of headers) {
 			if (p.hasOwnProperty(prop)) player[prop] = p[prop].toFixed(2)
 			else player[prop] = "0"
@@ -211,7 +210,7 @@ const createCSV = async (projections = []) => {
 
 	const csvWriter = createObjectCsvWriter({
 		path: "projections.csv",
-		header: ["posRank", "srcs", "name", "pos", "team", ...headers].map((h) => ({ id: h, title: h.toUpperCase() })),
+		header: ["posRank", "srcs", "injury_risk", "name", "pos", "team", ...headers].map((h) => ({ id: h, title: h.toUpperCase() })),
 	})
 
 	await csvWriter.writeRecords(entries)
