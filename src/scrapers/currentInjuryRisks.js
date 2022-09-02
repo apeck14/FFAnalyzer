@@ -9,25 +9,34 @@ module.exports = async (browser) => {
 		await page.waitForSelector(".m-longform-copy")
 
 		const players = await page.$eval(".m-longform-copy", (div) => {
-			const names = div.querySelectorAll("h3")
-			const injuries = div.querySelectorAll("h5 > strong, h5 > b")
+			const names = div.querySelectorAll("h5")
+			const injuries = div.querySelectorAll("p")
 
 			const injuryRisks = []
 
-			injuries.forEach((h5) => {
-				if (h5.innerText.includes("risk")) injuryRisks.push(h5.innerText)
+			injuries.forEach((p) => {
+				const endIndex = p.innerText.indexOf("\n") === -1 ? p.innerText.length : p.innerText.indexOf("\n")
+				if (p.innerText.includes("Injury risk:")) {
+					injuryRisks.push(p.innerText.slice(p.innerText.indexOf(":") + 1, endIndex).trim())
+				}
 			})
 
 			const allPlayers = []
 
-			names.forEach((h3, i) => {
-				const a = h3.querySelector("a[href*='players'], strong > a[href*='players'], b > a[href*='players']")
+			let index = 0
 
-				const risk = injuryRisks[i].replace("Injury risk:", "").trim()
+			names.forEach((h5) => {
+				const a = h5.querySelector("a[href*='players'], strong > a[href*='players'], b > a[href*='players']")
+
+				if (!a) return
+
+				const risk = injuryRisks[index]
 				allPlayers.push({
-					name: a.innerText,
+					name: a.innerText.trim(),
 					risk,
 				})
+
+				index++
 			})
 
 			return allPlayers
