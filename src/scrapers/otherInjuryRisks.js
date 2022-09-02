@@ -19,9 +19,9 @@ module.exports = async (browser, positions = ["qb", "rb", "wr", "te"]) => {
 		//grab data
 		for (const pos of positions) {
 			await page.click(positionButtonSelectors[pos])
-			await page.waitForTimeout(1500)
+			await page.waitForSelector("div.table-sip-info > table > tbody")
 
-			const positionPlayers = await page.$eval("body > div.dark-bg > div > div:nth-child(2) > div > div > div.table-sip-info > table > tbody", (tbody) => {
+			const positionPlayers = await page.$eval("div.table-sip-info > table > tbody", (tbody) => {
 				const allPlayers = []
 
 				const rows = tbody.querySelectorAll("tr")
